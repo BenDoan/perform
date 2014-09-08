@@ -1,13 +1,16 @@
-pysh
-====
+#perform
 
-A python module for easily running processes from python
+A python module for easily running processes from python.
 
-#Examples
+##Examples
+```python
+import perform
 
-    import pysh
-    stdout, stderr = pysh.ls()
-    print(pysh.git("ls-files", "-m")[0])
-    print(pysh._("pip2.7", "install", "pysh"))
+stdout, stderr = perform.ls()
 
-    stdout, _ = pysh.raspistill("-o ~/image.jpg")
+print(perform.git("ls-files", "-m")[0])
+
+print(perform._("pip2.7", "install", "perform"))
+
+stdout, _ = perform.raspistill("-o ~/image.jpg")
+```

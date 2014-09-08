@@ -1,15 +1,15 @@
 """
-Every executable program on the path and in the current working directory is added to the pysh module as a function.
+Perform is for calling processes from python in a simple and easy way.  Each program is added to the perform module as a function that returns a tuple of (stdout, stdin).
 
 Examples:
-To call a normal program that doesn't contain symbols:
-    pysh.ls()
+To call a normal program that whose name doesn't contain symbols:
+    stdin, stdout = perform.ls()
 
 To pass arguments to a program:
-    pysh.git("ls-files", "-m")
+    stdout = perform.git("ls-files", "-m")[0]
 
 To call a program that contains symbols in its name:
-    pysh._("pip2.7", "install", "pysh")
+    stdin, stdout = perform._("pip2.7", "install", "perform")
 """
 
 import os
@@ -24,7 +24,7 @@ def _is_executable(f):
 def _run_program(name, *args):
     args = [name] + list(args)
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    return [x.decode(sys.getdefaultencoding()) for x in p.communicate()]
+    return tuple((x.decode(sys.getdefaultencoding()) for x in p.communicate()))
 
 def _get_function(name):
     return lambda *args: _run_program(name, *args)
