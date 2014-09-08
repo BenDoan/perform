@@ -1,3 +1,17 @@
+"""
+Every executable program on the path and in the current working directory is added to the pysh module as a function.
+
+Examples:
+To call a normal program that doesn't contain symbols:
+    pysh.ls()
+
+To pass arguments to a program:
+    pysh.git("ls-files", "-m")
+
+To call a program that contains symbols in its name:
+    pysh._("pip2.7", "install", "pysh")
+"""
+
 import os
 import subprocess
 import sys
@@ -16,6 +30,7 @@ def _get_function(name):
     return lambda *args: _run_program(name, *args)
 
 def get_programs():
+    """Returns a list of the available executable programs"""
     programs = []
     os.environ['PATH'] += os.pathsep + os.getcwd()
     for p in os.environ['PATH'].split(os.pathsep):
