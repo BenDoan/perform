@@ -26,9 +26,6 @@ def _run_program(name, *args):
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return tuple((x.decode(sys.getdefaultencoding()) for x in p.communicate()))
 
-def _get_function(name):
-    return lambda *args: _run_program(name, *args)
-
 def get_programs():
     """Returns a list of the available executable programs"""
     programs = []
@@ -41,9 +38,8 @@ def get_programs():
     return programs
 
 
-valid_names = (x for x in get_programs() if x.isalpha())
 for f in get_programs():
     if f.isalpha():
-        globals()[f] = _get_function(f)
+        globals()[f] = lambda *args: _run_program(f, *args)
 
 globals()["_"] = lambda name, *args: _run_program(name, *args)

@@ -8,5 +8,6 @@ setup(
         author="Ben Doan",
         author_email="ben@bendoan.me",
         license="MIT",
-        keywords="subprocess shell"
+        keywords="subprocess shell",
+        py_modules = ['perform']
 )
