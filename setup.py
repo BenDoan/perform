@@ -1,13 +1,29 @@
+from __future__ import with_statement
+
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 from setuptools import setup, find_packages
+
+import perform
+
+perform_classifiers = [
+    "Programming Language :: Python :: 2",
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+]
 
 setup(
         name="perform",
-        version="0.0.1",
-        description="easily call processes from python",
+        version=perform.__version__,
+        description="Easily call processes from python",
         url="github.com/BenDoan/perform",
         author="Ben Doan",
         author_email="ben@bendoan.me",
         license="MIT",
-        keywords="subprocess shell",
         py_modules = ['perform']
 )
