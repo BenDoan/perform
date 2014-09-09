@@ -5,7 +5,7 @@ Perform is for calling processes from python in a simple and easy way.  Each pro
 
 ```python
 import perform
-stdin, stdout = perform.ls()
+stdout, stderr = perform.ls()
 ```
 
 - To pass arguments to a program:
@@ -19,7 +19,7 @@ stdout = perform.git("ls-files", "-m")[0]
 
 ```python
 import perform
-stdin, stdout = perform._("pip2.7", "install", "perform")
+stdout, stderr = perform._("pip2.7", "install", "perform")
 ```
 
 ##more examples

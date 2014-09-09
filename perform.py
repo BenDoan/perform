@@ -5,13 +5,13 @@ Perform is for calling processes from python in a simple and easy way.  Each pro
 
 Examples:
 To call a normal program that whose name doesn't contain symbols:
-    stdin, stdout = perform.ls()
+    stdout, stderr = perform.ls()
 
 To pass arguments to a program:
     stdout = perform.git("ls-files", "-m")[0]
 
 To call a program that contains symbols in its name:
-    stdin, stdout = perform._("pip2.7", "install", "perform")
+    stdout, stderr = perform._("pip2.7", "install", "perform")
 """
 
 import os
