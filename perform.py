@@ -15,6 +15,7 @@ To call a program that contains symbols in its name:
 """
 
 import os
+import re
 import subprocess
 import sys
 
@@ -46,9 +47,10 @@ def get_runner(f):
         return _run_program(f, *args)
     return run
 
-for f in get_programs():
-    if f.isalpha():
-        globals()[f] = get_runner(f)
+def _refresh_listing():
+    for f in get_programs():
+        if re.match(r'^[a-zA-Z_][a-zA-Z_0-9]*$', f) is not None:
+            globals()[f] = get_runner(f)
+    globals()["_"] = lambda name, *args: _run_program(name, *args)
 
-globals()["_"] = lambda name, *args: _run_program(name, *args)
-
+_refresh_listing()
