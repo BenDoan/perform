@@ -2,7 +2,6 @@ import os
 import random
 import stat
 import unittest
-import uuid
 
 import perform
 
@@ -18,7 +17,7 @@ class TestPerform(unittest.TestCase):
         self.assertEqual("ls: invalid option -- '5'\nTry 'ls --help' for more information.\n", perform.ls("-5")[1])
 
     def test_local_exe(self):
-        name = "deletemea2329f80396e11e495fd5c514f635c22".format(uuid.uuid1().hex)
+        name = "deletemea2329f80396e11e495fd5c514f635c22"
         echo_program = '#!/usr/bin/bash\necho "Hello!"'
 
         with open(name, "w") as f:
