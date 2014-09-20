@@ -20,6 +20,7 @@ import subprocess
 import sys
 
 from os import path
+from functools import partial
 
 __author__ = "Ben Doan <ben@bendoan.me>"
 __version__ = "0.0.1"
@@ -42,15 +43,10 @@ def get_programs():
                 if _is_executable(path.join(p, f)):
                     yield f
 
-def get_runner(f):
-    def run(*args):
-        return _run_program(f, *args)
-    return run
-
 def _refresh_listing():
     for f in get_programs():
         if re.match(r'^[a-zA-Z_][a-zA-Z_0-9]*$', f) is not None:
-            globals()[f] = get_runner(f)
+            globals()[f] = partial(_run_program,f)
     globals()["_"] = lambda name, *args: _run_program(name, *args)
 
 _refresh_listing()
