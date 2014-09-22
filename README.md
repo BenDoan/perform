@@ -22,7 +22,7 @@ import perform
 stdout = perform._("pip2.7", "install", "perform")
 ```
 
--To get stderr from a program:
+- To get stderr from a program:
 ```python
 try:
     perform.git("asdad")
