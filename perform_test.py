@@ -7,8 +7,8 @@ import perform
 
 class TestPerform(unittest.TestCase):
     def test_cat(self):
-        with open("test.py", "r") as f:
-            self.assertEqual("".join(f.readlines()), perform.cat("test.py"))
+        with open("perform_test.py", "r") as f:
+            self.assertEqual("".join(f.readlines()), perform.cat("perform_test.py"))
 
     def test_echo(self):
         self.assertEqual("Hello\n", perform.echo("Hello"))
