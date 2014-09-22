@@ -31,6 +31,12 @@ from functools import partial
 __author__ = "Ben Doan <ben@bendoan.me>"
 __version__ = "0.0.2"
 
+class StandardErrorException(Exception):
+    pass
+
+class ProgramNotFoundException(Exception):
+    pass
+
 def _is_executable(f):
     return path.isfile(f) and os.access(f, os.X_OK)
 
@@ -39,7 +45,7 @@ def _run_program(name, *args, **kwargs):
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = tuple(x.decode(sys.getdefaultencoding()) for x in p.communicate())
     if stderr != "":
-        raise Exception(stderr)
+        raise StandardErrorException(stderr)
     return stdout
 
 def get_programs():
@@ -52,10 +58,16 @@ def get_programs():
                 if _is_executable(path.join(p, f)):
                     yield f
 
+def _underscore_run_program(name, *args, **kwargs):
+    if name in get_programs():
+        return _run_program(name, *args, **kwargs)
+    else:
+        raise ProgramNotFoundException()
+
 def _refresh_listing():
     for f in get_programs():
         if re.match(r'^[a-zA-Z_][a-zA-Z_0-9]*$', f) is not None:
             globals()[f] = partial(_run_program,f)
-    globals()["_"] = lambda name, *args, **kwargs: _run_program(name, *args, **kwargs)
+    globals()["_"] = _underscore_run_program
 
 _refresh_listing()

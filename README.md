@@ -35,7 +35,7 @@ except Exception as e:
 ```python
 import perform
 
-stdout= perform.ls()
+stdout = perform.ls()
 
 print(perform.git("ls-files", "-m"))
 
