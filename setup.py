@@ -23,9 +23,10 @@ setup(
         name="perform",
         version=perform.__version__,
         description="Easily call processes from python",
-        url="github.com/BenDoan/perform",
+        url="http://github.com/BenDoan/perform",
         author="Ben Doan",
         author_email="ben@bendoan.me",
         license="MIT",
-        py_modules = ['perform']
+        py_modules = ['perform'],
+        classifiers=perform_classifiers
 )

@@ -29,7 +29,7 @@ from os import path
 from functools import partial
 
 __author__ = "Ben Doan <ben@bendoan.me>"
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 class StandardErrorException(Exception):
     pass
@@ -45,8 +45,8 @@ def _run_program(name, *args, **kwargs):
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = tuple(x.decode(sys.getdefaultencoding()) for x in p.communicate())
     if stderr != "":
-        raise StandardErrorException(stderr)
-    return stdout
+        raise StandardErrorException(stderr.strip())
+    return stdout.strip()
 
 def get_programs():
     """Returns a generator that yields the available executable programs"""
