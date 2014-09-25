@@ -39,5 +39,8 @@ class TestPerform(unittest.TestCase):
     def test_underscore(self):
         self.assertEqual("Hello all", perform._("echo", 'Hello all'))
 
+    def test_underscore_shell(self):
+        self.assertEqual(perform._("echo 'hello\nworld' | tac", shell=True), 'world\nhello')
+
 if __name__ == '__main__':
     unittest.main()

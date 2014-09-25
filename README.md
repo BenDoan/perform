@@ -23,11 +23,18 @@ stdout = perform._("pip2.7", "install", "perform")
 ```
 
 - To get stderr from a program:
+
 ```python
 try:
     perform.git("asdad")
 except Exception as e:
     print(str(e))
+```
+
+- To call a command in the shell:
+
+```python
+print(perform._("ls | grep 'py'", shell=True))
 ```
 
 ##more examples
@@ -42,4 +49,6 @@ print(perform.git("ls-files", "-m"))
 print(perform._("pip2.7", "install", "perform"))
 
 stdout = perform.raspistill("-o ~/image.jpg")
+
+print(perform.python("-c", "import perform;print(perform.echo('hello'))")
 ```

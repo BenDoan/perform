@@ -23,6 +23,7 @@ setup(
         name="perform",
         version=perform.__version__,
         description="Easily call processes from python",
+        long_description=perform.__doc__,
         url="http://github.com/BenDoan/perform",
         author="Ben Doan",
         author_email="ben@bendoan.me",
