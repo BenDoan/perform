@@ -31,7 +31,7 @@ from os import path
 from functools import partial
 
 __author__ = "Ben Doan <ben@bendoan.me>"
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 
 class StandardErrorException(Exception):
     pass
