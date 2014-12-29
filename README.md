@@ -22,13 +22,14 @@ import perform
 stdout = perform._("pip2.7", "install", "perform")
 ```
 
-- To get stderr from a program:
+- To get extra information from a program:
 
 ```python
-try:
-    perform.git("asdad")
-except Exception as e:
-    print(str(e))
+command_object = perform.ls(return_object=True)
+
+stdout = command_object.stdout
+stderr = command_object.stderr
+stdout = command_object.stdout
 ```
 
 - To call a command in the shell:
