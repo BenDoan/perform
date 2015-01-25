@@ -51,7 +51,8 @@ class TestPerform(unittest.TestCase):
         self.assertEqual(echo("Hello"), "Hello")
 
     def test_return_object_underscore(self):
-        pass
+        self.assertEqual(perform._("echo", "hello", "world", return_object=True).stdout, "hello world")
+        self.assertEqual(perform._("echo", "-E", r"hello\thello", return_object=True).stdout, r"hello\thello")
 
 if __name__ == '__main__':
     unittest.main()
