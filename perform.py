@@ -3,32 +3,31 @@ Perform is a python module for calling processes in a simple and easy way.  Each
 
 ##usage:
 - To call a program:
-
     import perform
     stdout = perform.ls()
 
 - To pass arguments to a program:
-
     stdout = perform.git("ls-files", "-m")
 
 - To call a program that contains symbols in its name:
-
     stdout = perform._("pip2.7", "install", "perform")
 
 - To get extra information from a program:
+    obj = perform.ls(return_object=True)
 
-    command_object = perform.ls(return_object=True)
-
-    stdout = command_object.stdout
-    stderr = command_object.stderr
-    stdout = command_object.stdout
+    stdout = obj.stdout
+    stderr = obj.stderr
+    errcode = obj.errcode
 
 - To call a command in the shell:
-
     print(perform._("ls | grep 'py'", shell=True))
 
-##more examples
+- To import a specific command:
+    from perform import ls
 
+    print(ls("-a"))
+
+##more examples
     import perform
 
     stdout = perform.ls()

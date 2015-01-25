@@ -15,12 +15,6 @@ class TestPerform(unittest.TestCase):
     def test_echo(self):
         self.assertEqual("Hello", perform.echo("Hello"))
 
-    def test_error_ls(self):
-        try:
-            perform.ls("-5")
-        except Exception as e:
-            self.assertEqual("ls: invalid option -- '5'\nTry 'ls --help' for more information.", str(e))
-
     def test_local_exe(self):
         name = "deletemea2329f80396e11e495fd5c514f635c22"
         echo_program = '#!/usr/bin/bash\necho "Hello!"\n'
@@ -44,13 +38,17 @@ class TestPerform(unittest.TestCase):
     def test_underscore_shell(self):
         self.assertEqual(perform._("echo 'hello\nworld' | tac", shell=True), 'world\nhello')
 
-    def test_return_object_std(self):
+    def test_return_object(self):
         self.assertEqual(perform.echo("Hello", return_object=True).stdout, "Hello")
+
         self.assertEqual(perform.ls("-5", return_object=True).stderr, self.BAD_LS_OUTPUT)
 
         self.assertEqual(perform.echo("Hello", return_object=True).errcode, 0)
         self.assertEqual(perform.ls("-5", return_object=True).errcode, 2)
 
+    def test_single_import(self):
+        from perform import echo
+        self.assertEqual(echo("Hello"), "Hello")
 
     def test_return_object_underscore(self):
         pass

@@ -23,17 +23,25 @@ stdout = perform._("pip2.7", "install", "perform")
 - To get extra information from a program:
 
 ```python
-command_object = perform.ls(return_object=True)
+obj = perform.ls(return_object=True)
 
-stdout = command_object.stdout
-stderr = command_object.stderr
-stdout = command_object.stdout
+stdout = obj.stdout
+stderr = obj.stderr
+errcode = obj.errcode
 ```
 
 - To call a command in the shell:
 
 ```python
 print(perform._("ls | grep 'py'", shell=True))
+```
+
+- To import a specific command:
+
+```python
+from perform import ls
+
+print(ls("-a"))
 ```
 
 ##more examples
