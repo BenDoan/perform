@@ -23,7 +23,7 @@ stdout = perform._("pip2.7", "install", "perform")
 - To get extra information from a program:
 
 ```python
-obj = perform.ls(return_object=True)
+obj = perform.ls(return_object=True) # or perform.ls(ro=True)
 
 stdout = obj.stdout
 stderr = obj.stderr

@@ -46,6 +46,8 @@ class TestPerform(unittest.TestCase):
         self.assertEqual(perform.echo("Hello", return_object=True).errcode, 0)
         self.assertEqual(perform.ls("-5", return_object=True).errcode, 2)
 
+        self.assertEqual(perform.echo("Hello", ro=True).stdout, "Hello")
+
     def test_single_import(self):
         from perform import echo
         self.assertEqual(echo("Hello"), "Hello")

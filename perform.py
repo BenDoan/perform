@@ -75,7 +75,14 @@ def _is_executable(f):
 def _run_program(name, *args, **kwargs):
 
     shell = kwargs.get("shell", False)
-    return_object = kwargs.get("return_object", False)
+
+    return_object = False
+
+    if "return_object" in kwargs:
+        return_object = kwargs["return_object"]
+
+    if "ro" in kwargs:
+        return_object = kwargs["ro"]
 
     args = [name] + list(args)
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=shell)
@@ -105,6 +112,8 @@ def _underscore_run_program(name, *args, **kwargs):
     'Hello'
     >>> _underscore_run_program("echo", "Hello", return_object=True).stdout
     'Hello'
+    >>> _underscore_run_program("echo", "Hello", ro=True).stdout
+    'Hello'
     """
     if name in get_programs() or kwargs.get("shell", False):
         return _run_program(name, *args, **kwargs)
@@ -114,8 +123,7 @@ def _underscore_run_program(name, *args, **kwargs):
 def _refresh_listing():
     for program in get_programs():
         if re.match(r'^[a-zA-Z_][a-zA-Z_0-9]*$', program) is not None:
-            globals()[program] = partial(_run_program, program,
-                                    shell=False, return_object=False)
+            globals()[program] = partial(_run_program, program)
 
     globals()["_"] = _underscore_run_program
 
