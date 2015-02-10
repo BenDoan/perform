@@ -56,5 +56,11 @@ class TestPerform(unittest.TestCase):
         self.assertEqual(perform._("echo", "hello", "world", return_object=True).stdout, "hello world")
         self.assertEqual(perform._("echo", "-E", r"hello\thello", return_object=True).stdout, r"hello\thello")
 
+    def test_no_return(self):
+        #no_return allows for non-blocking calls, so
+        #this tests those as well
+        perform.yes(no_return=True)
+        self.assertTrue(True)
+
 if __name__ == '__main__':
     unittest.main()

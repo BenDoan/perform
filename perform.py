@@ -73,27 +73,30 @@ def _is_executable(f):
     return path.isfile(f) and os.access(f, os.X_OK)
 
 def _run_program(name, *args, **kwargs):
-
     shell = kwargs.get("shell", False)
 
     return_object = False
+    if "ro" in kwargs:
+        return_object = kwargs["ro"]
 
     if "return_object" in kwargs:
         return_object = kwargs["return_object"]
 
-    if "ro" in kwargs:
-        return_object = kwargs["ro"]
+    no_return = False
+    if "no_return" in kwargs:
+        no_return = kwargs["no_return"]
 
     args = [name] + list(args)
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=shell)
 
-    stdout, stderr = tuple(x.decode(sys.getdefaultencoding()).strip() for x in p.communicate())
+    if not no_return:
+        stdout, stderr = tuple(x.decode(sys.getdefaultencoding()).strip() for x in p.communicate())
 
 
-    if return_object:
-        return CommandOutput(stdout, stderr, p.returncode)
-    else:
-        return stdout
+        if return_object:
+            return CommandOutput(stdout, stderr, p.returncode)
+        else:
+            return stdout
 
 def get_programs():
     """Returns a generator that yields the available executable programs"""
