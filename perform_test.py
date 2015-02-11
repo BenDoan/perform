@@ -3,6 +3,8 @@ import random
 import stat
 import unittest
 
+from datetime import datetime, timedelta
+
 import perform
 
 class TestPerform(unittest.TestCase):
@@ -61,6 +63,13 @@ class TestPerform(unittest.TestCase):
         #this tests those as well
         perform.yes(no_return=True)
         self.assertTrue(True)
+
+    def test_blocking(self):
+        now = datetime.now()
+        perform.sleep("1")
+        then = datetime.now()
+
+        self.assertTrue((then-now) > timedelta(seconds=1))
 
 if __name__ == '__main__':
     unittest.main()
