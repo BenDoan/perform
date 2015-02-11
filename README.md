@@ -44,6 +44,14 @@ from perform import ls
 print(ls("-a"))
 ```
 
+- To use perform for a non-blocking call:
+
+```python
+perform.firefox("google.com", no_return=True)
+perform.firefox("github.com", no_return=True)
+perform.firefox("kernel.org", nr=True)
+```
+
 ##more examples
 
 ```python

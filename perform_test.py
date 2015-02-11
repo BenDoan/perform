@@ -27,7 +27,7 @@ class TestPerform(unittest.TestCase):
         st = os.stat(name)
         os.chmod(name, st.st_mode | stat.S_IEXEC)
 
-        perform._refresh_listing()
+        perform.refresh_listing()
 
         try:
             self.assertEqual(perform.deletemea2329f80396e11e495fd5c514f635c22(), "Hello!")
