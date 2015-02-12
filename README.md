@@ -1,6 +1,6 @@
 Perform is a python module for calling processes in a simple and easy way.  Each program is added to the perform module as a function that returns the stdout printed by the program.
 
-##usage:
+##Usage
 - To call a program:
 
 ```python
