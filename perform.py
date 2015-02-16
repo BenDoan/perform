@@ -157,7 +157,3 @@ def refresh_listing():
     globals()["_"] = _underscore_run_program
 
 refresh_listing()
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod(verbose=True)

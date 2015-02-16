@@ -2,6 +2,7 @@ import os
 import random
 import stat
 import unittest
+import uuid
 
 from datetime import datetime, timedelta
 
@@ -70,6 +71,21 @@ class TestPerform(unittest.TestCase):
         then = datetime.now()
 
         self.assertTrue((then-now) > timedelta(seconds=1))
+
+    def test_str_return(self):
+        self.assertEqual("hello", str(perform.echo("hello", ro=True)))
+
+    def test_program_not_found(self):
+        alphabet = 'abcdefghijklmnopqrstuvwxyz'
+        prog_name = ''.join(random.choice(alphabet) for i in range(20))
+
+        got_exception = False
+        try:
+            perform._(prog_name)
+        except perform.ProgramNotFoundException:
+            got_exception = True
+
+        self.assertTrue(got_exception)
 
 if __name__ == '__main__':
     unittest.main()
