@@ -51,7 +51,6 @@ import os
 import re
 import subprocess
 import sys
-import doctest
 
 from os import path
 from functools import partial
