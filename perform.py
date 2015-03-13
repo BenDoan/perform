@@ -94,6 +94,9 @@ def _run_program(name, *args, **kwargs):
     :param nr: same as no_return
     :type nr: bool
 
+    :param input: specifies a string to send to the process
+    :type input: str
+
     :returns: if return_object the output as a CommandOutput object, if no_return nothing, else the stdout of the program
     :rtype: CommandOutput or str or None
     """
@@ -105,11 +108,16 @@ def _run_program(name, *args, **kwargs):
     no_return = kwargs.get("nr", False)
     no_return = kwargs.get("no_return", no_return)
 
+    inp = kwargs.get("input", None)
+
     args = [name] + list(args)
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=shell)
 
     if not no_return:
-        stdout, stderr = tuple(x.decode(sys.getdefaultencoding()).strip() for x in p.communicate())
+        if inp:
+            stdout, stderr = tuple(x.decode(sys.getdefaultencoding()).strip() for x in p.communicate(inp))
+        else:
+            stdout, stderr = tuple(x.decode(sys.getdefaultencoding()).strip() for x in p.communicate())
 
 
         if return_object:
