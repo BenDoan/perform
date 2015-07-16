@@ -71,7 +71,7 @@ class CommandOutput():
         self.errcode = errcode
 
     def __str__(self):
-        return self.stdout
+        return "{} - {} - {}".format(self.errcode, self.stdout, self.stderr)
 
 def _is_executable(f):
     return path.isfile(f) and os.access(f, os.X_OK)
